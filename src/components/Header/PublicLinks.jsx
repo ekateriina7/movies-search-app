@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 function PublicLinks() {
   return (
@@ -7,6 +7,9 @@ function PublicLinks() {
       <ul className="right">
         <li>
           <NavLink to="/login">Login</NavLink>
+        </li>
+        <li>
+          <NavLink to="/signup">Sign up</NavLink>
         </li>
       </ul>
     </div>

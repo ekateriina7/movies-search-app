@@ -9,9 +9,9 @@ import Error from "../pages/Error";
 export const allRoutes = [
   { path: "/movie/:id", component: Movie, isPrivate: true },
   { path: "/movies", component: Movies, isPrivate: true },
-  { path: "account", component: Account, isPrivate: true },
+  { path: "/account", component: Account, isPrivate: true },
   { path: "/favorites", component: Favorites, isPrivate: true },
   { path: "/error", component: Error },
   { path: "/login", component: LogIn },
-  { path: "/signip", component: SignUp },
+  { path: "/signup", component: SignUp },
 ];
