@@ -1,13 +1,12 @@
 import React from "react";
 import { useFormik } from "formik";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { logIn } from "../actions";
 import Button from "../components/ui/Button/Button";
+import { registerUser } from "../actions";
 
 function SignUp() {
-  const state = useSelector((state) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
   const schema = Yup.object({
@@ -30,11 +29,21 @@ function SignUp() {
   });
   const { handleSubmit, handleChange, handleBlur, touched, values, errors } =
     useFormik({
-      initialValues: state.currentUser,
+      initialValues: {
+        firstName: "",
+        lastName: "",
+        dateOfBirth: "",
+        sex: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
+        username: "",
+      },
       validationSchema: schema,
       onSubmit: (values) => {
-        dispatch(logIn(values));
-        history.push('/movies')
+        console.log(values)
+        dispatch(registerUser(values));
+        //history.push("/movies");
       },
     });
   return (
@@ -115,7 +124,7 @@ function SignUp() {
           <div className="input-field">
             <input
               id="password"
-              type="text"
+              type="password"
               name="password"
               value={values.password}
               onChange={handleChange}
@@ -130,7 +139,7 @@ function SignUp() {
           <div className="input-field">
             <input
               id="confirmPassword"
-              type="text"
+              type="password"
               name="confirmPassword"
               value={values.confirmPassword}
               onChange={handleChange}
