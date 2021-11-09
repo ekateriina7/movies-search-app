@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
-import {  useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import Button from "../components/ui/Button/Button";
-import { registerUser } from "../actions";
 
 
 function Login() {
-  const dispatch = useDispatch()
  
   const schema = Yup.object({
     password: Yup.string().required("Password is required"),

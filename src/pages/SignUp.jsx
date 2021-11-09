@@ -1,13 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import Button from "../components/ui/Button/Button";
 import { registerUser } from "../actions";
 
 function SignUp() {
-  const history = useHistory();
+  //const history = useHistory();
   const dispatch = useDispatch();
   const schema = Yup.object({
     firstName: Yup.string()

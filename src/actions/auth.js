@@ -22,7 +22,7 @@ export const registerUser = (user) => async (dispatch) => {
       user.password
     );
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
-    const docRef = await setDoc(doc(db, "users", data.user.uid), {
+     await setDoc(doc(db, "users", data.user.uid), {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
