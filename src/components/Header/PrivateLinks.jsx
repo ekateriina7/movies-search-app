@@ -1,12 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions";
 
 const PrivateLinks = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const onSubmit = (e) => {
     dispatch(logout());
+    localStorage.removeItem('user')
+    history.push('/login')
   };
   return (
     <div>

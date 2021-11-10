@@ -1,13 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
-//import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import Button from "../components/ui/Button/Button";
 import { registerUser } from "../actions";
 
 function SignUp() {
-  //const history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
   const schema = Yup.object({
     firstName: Yup.string()
@@ -41,9 +41,9 @@ function SignUp() {
       },
       validationSchema: schema,
       onSubmit: (values) => {
-        console.log(values)
+        localStorage.setItem('user','is logged in')
         dispatch(registerUser(values));
-        //history.push("/movies");
+        history.push("/movies");
       },
     });
   return (
@@ -167,6 +167,7 @@ function SignUp() {
             ) : null}
           </div>
           <Button>Register</Button>
+          <Link to='/login'><p>Already have account? Log in</p></Link>
         </div>
       </form>
     </div>

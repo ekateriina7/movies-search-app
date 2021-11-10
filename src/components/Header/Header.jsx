@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PublicLinks from "./PublicLinks";
 import PrivateLinks from "./PrivateLinks";
+import PublicLinks from "./PublicLinks";
 
 function Header() {
   return (
@@ -10,8 +10,7 @@ function Header() {
         <Link to="/" className="brand-logo">
           Movies
         </Link>
-        <PublicLinks/>
-        <PrivateLinks/>
+        {localStorage.getItem('user')?<PrivateLinks/>:<PublicLinks/>}
       </div>
     </nav>
   );

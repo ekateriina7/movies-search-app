@@ -1,16 +1,16 @@
 import { initializeApp } from 'firebase/app';
-import dotenv from "dotenv";
-dotenv.config();
+//import dotenv from "dotenv";
+//dotenv.config();
 
 let firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_PROJECT_ID ,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_APP_ID,
-    measurementId: process.env.REACT_APP_MEASURMENT_ID
-  };
+  apiKey: "AIzaSyDkmb_bY55Yte4An5iTGCLcEpfZ--hdbzY",
+  authDomain: "movies-search-1c281.firebaseapp.com",
+  projectId: "movies-search-1c281",
+  storageBucket: "movies-search-1c281.appspot.com",
+  messagingSenderId: "292908955545",
+  appId: "1:292908955545:web:435e196455d64044774508",
+  measurementId: "G-BDGFF4EQGD"
+};
 
   const app = initializeApp(firebaseConfig);
 
