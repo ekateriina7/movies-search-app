@@ -1,6 +1,6 @@
 import LogIn from "../pages/LogIn";
 import SignUp from "../pages/SignUp";
-import Movies from "../pages/Movies";
+import Movies from "../pages/Movies/Movies";
 import Movie from "../pages/Movie";
 import Account from "../pages/Account";
 import Favorites from "../pages/Favorites";

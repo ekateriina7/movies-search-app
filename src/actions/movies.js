@@ -16,3 +16,20 @@ export const getMovies = () => async (dispatch) => {
     });
   }
 };
+
+export const GET_MOVIE = "Get movie";
+export const GET_MOVIE_SUCCESS = "Get movie success";
+export const GET_MOVIE_ERROR = "Get movie error";
+export const getMovie = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_MOVIE });
+    let data = await api.getMovie(id)
+    dispatch({ type: GET_MOVIE_SUCCESS, payload: data });
+     return data
+  } catch (error) {
+    dispatch({
+      type: GET_MOVIE_ERROR,
+      payload: error.message,
+    });
+  }
+};

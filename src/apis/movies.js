@@ -12,3 +12,8 @@ export const moviesAxios = axios.create({
     const { data } = await moviesAxios.get('/movie/popular');
     return data;
   };
+
+  export const getMovie = async (movieId) => {
+    const { data } = await moviesAxios.get(`/movie/${movieId}`);
+    return data;
+  };

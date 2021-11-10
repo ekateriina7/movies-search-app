@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getMovie } from "../actions";
-import MovieCard from "../components/MovieCard/MovieCard";
+import { getMovies } from "../../actions";
+import MovieCard from "../../components/MovieCard/MovieCard";
+import './Movies.scss'
 
-const ids = [2, 3];
-
-function Favorites() {
+function Movies() {
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
-    let movies = [];
     async function fetchMyAPI() {
-      ids.map((id) => {
-        dispatch(getMovie(id)).then((res) => {
-          return movies.push(res);
-        });
-        return movies;
-      });
+      let movies = await dispatch(getMovies());
+      movies = movies.results;
       setMovies(movies);
     }
     fetchMyAPI();
   }, [dispatch]);
   console.log(movies);
   return (
-    <div className="movies">
+    <div className='movies'>
       {movies &&
         movies.map((movie) => {
           return (
@@ -39,4 +33,4 @@ function Favorites() {
   );
 }
 
-export default Favorites;
+export default Movies;
