@@ -1,4 +1,4 @@
-import { getFirestore, setDoc, doc } from "firebase/firestore/lite";
+import { getFirestore, setDoc, doc, collection } from "firebase/firestore/lite";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -16,20 +16,24 @@ export const REGISTER_USER_ERROR = "Register user error";
 export const registerUser = (user) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER });
-    let data = await createUserWithEmailAndPassword(
+    const data = await createUserWithEmailAndPassword(
       auth,
       user.email,
       user.password
     );
+    localStorage.setItem('userId',data.user.uid)
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
-     await setDoc(doc(db, "users", data.user.uid), {
+    const userObj = {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       sex: user.sex,
       dateOfBirth: user.dateOfBirth,
       username: user.username,
-    });
+      favorites:[]
+    }
+    const dbRef = doc(db,`users/${data.user.uid}/user/${data.user.uid}`)
+     await setDoc(dbRef,userObj);
   } catch (error) {
     dispatch({
       type: REGISTER_USER_ERROR,
@@ -45,11 +49,12 @@ export const LOGIN_USER_ERROR = "Login user error";
 export const loginUser = (user) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_USER });
-    let data = await signInWithEmailAndPassword(
+    const data = await signInWithEmailAndPassword(
       auth,
       user.email,
       user.password
     );
+    localStorage.setItem('userId',data.user.uid)
     dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

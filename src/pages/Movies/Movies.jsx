@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getMovies } from "../../actions";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import './Movies.scss'
+import "./Movies.scss";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -17,7 +17,7 @@ function Movies() {
   }, [dispatch]);
   console.log(movies);
   return (
-    <div className='movies'>
+    <div className="movies">
       {movies &&
         movies.map((movie) => {
           return (
@@ -26,6 +26,7 @@ function Movies() {
               title={movie.title}
               imagePath={movie.poster_path}
               vote={movie.vote_average}
+              id={movie.id}
             />
           );
         })}

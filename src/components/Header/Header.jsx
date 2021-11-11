@@ -10,7 +10,7 @@ function Header() {
         <Link to="/" className="brand-logo">
           Movies
         </Link>
-        {localStorage.getItem('user')?<PrivateLinks/>:<PublicLinks/>}
+        {localStorage.getItem('userId')?<PrivateLinks/>:<PublicLinks/>}
       </div>
     </nav>
   );

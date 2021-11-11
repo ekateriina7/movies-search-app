@@ -1,4 +1,11 @@
 .movie-card{
     width: 23%;
     margin:  1vh;
+
+    &:hover{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+    }
+    img{
+        cursor: pointer;
+    }
 }

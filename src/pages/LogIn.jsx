@@ -19,7 +19,6 @@ function Login() {
       initialValues: {email:'', password:''},
       validationSchema: schema,
       onSubmit: (values) => {
-        localStorage.setItem('user','is logged in')
         dispatch(loginUser(values));
         history.push("/movies");
       },

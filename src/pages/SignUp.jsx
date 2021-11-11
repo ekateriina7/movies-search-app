@@ -41,7 +41,6 @@ function SignUp() {
       },
       validationSchema: schema,
       onSubmit: (values) => {
-        localStorage.setItem('user','is logged in')
         dispatch(registerUser(values));
         history.push("/movies");
       },

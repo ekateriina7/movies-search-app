@@ -8,7 +8,7 @@ const PrivateLinks = () => {
   const history = useHistory();
   const onSubmit = (e) => {
     dispatch(logout());
-    localStorage.removeItem('user')
+    localStorage.removeItem('userId')
     history.push('/login')
   };
   return (
