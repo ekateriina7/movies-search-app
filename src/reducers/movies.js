@@ -8,19 +8,19 @@ import {
   MARK_FAVORITE_ERROR,
   MARK_FAVORITE_SUCCESS,
   MARK_FAVORITE,
-  GET_FAVORITE,
-  GET_FAVORITE_SUCCESS,
-  GET_FAVORITE_ERROR,
+  GET_USER_DATA,
+  GET_USER_DATA_SUCCESS,
+  GET_USER_DATA_ERROR,
 } from "../actions/";
 const initialState = {
   error: null,
   loading: false,
   movies: [],
   movie: "",
-  favorite: "",
+  userData: "",
 };
 
-export const authReducer = (state = initialState, action) => {
+export const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MOVIES:
       return { loading: true };
@@ -46,13 +46,13 @@ export const authReducer = (state = initialState, action) => {
 
     case MARK_FAVORITE_ERROR:
       return { loading: false, error: action.payload };
-    case GET_FAVORITE:
+    case GET_USER_DATA:
       return { loading: true };
 
-    case GET_FAVORITE_SUCCESS:
-      return { loading: false, favorite: action.payload };
+    case GET_USER_DATA_SUCCESS:
+      return { loading: false, userData: action.payload };
 
-    case GET_FAVORITE_ERROR:
+    case GET_USER_DATA_ERROR:
       return { loading: false, error: action.payload };
 
     default:

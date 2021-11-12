@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getMovie, getFavorites } from "../actions";
+import { getMovie, getUserData } from "../actions";
 import MovieCard from "../components/MovieCard/MovieCard";
 
 //const ids = [2, 3];
@@ -8,10 +8,10 @@ import MovieCard from "../components/MovieCard/MovieCard";
 function Favorites() {
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
-  const [ids, setIds] = useState([]);
   useEffect(() => {
     async function fetchMyAPI() {
-      const ids = await dispatch(getFavorites(localStorage.getItem('userId')));
+      const  data = await dispatch(getUserData(localStorage.getItem('userId')));
+      const ids = data.favorites
       console.log(ids)
       let movies = [];
       ids&&ids.map((id) => {

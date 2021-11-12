@@ -7,10 +7,10 @@ const db = getFirestore(app);
 export const GET_MOVIES = "Get movies";
 export const GET_MOVIES_SUCCESS = "Get movies success";
 export const GET_MOVIES_ERROR = "Get movies error";
-export const getMovies = () => async (dispatch) => {
+export const getMovies = (page) => async (dispatch) => {
   try {
     dispatch({ type: GET_MOVIES });
-    let data = await api.getMovies()
+    let data = await api.getMovies(page)
     dispatch({ type: GET_MOVIES_SUCCESS, payload: data });
      return data
   } catch (error) {
@@ -56,21 +56,19 @@ export const markAsFavorite = (userId, id) => async (dispatch) => {
   }
 };
 
-export const GET_FAVORITE = "Get favorite";
-export const GET_FAVORITE_SUCCESS = "Get favorite success";
-export const GET_FAVORITE_ERROR = "Get favorite error";
-export const getFavorites = (userId) => async (dispatch) => {
+export const GET_USER_DATA = "Get user data";
+export const GET_USER_DATA_SUCCESS = "Get user data success";
+export const GET_USER_DATA_ERROR = "Get user data error";
+export const getUserData = (userId) => async (dispatch) => {
   try {
-    dispatch({ type: GET_FAVORITE });
-    console.log(userId)
+    dispatch({ type: GET_USER_DATA });
     const docRef = doc(db,'users', userId, 'user', userId,);
     let data = await getDoc(docRef);
-    console.log(data.data().favorites)
-    dispatch({ type: GET_FAVORITE_SUCCESS, payload: data });
-     return data.data().favorites
+    dispatch({ type: GET_USER_DATA_SUCCESS, payload: data });
+     return data.data()
   } catch (error) {
     dispatch({
-      type: GET_FAVORITE_ERROR,
+      type: GET_USER_DATA_ERROR,
       payload: error.message,
     });
   }

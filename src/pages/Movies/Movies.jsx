@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getMovies } from "../../actions";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import "./Movies.scss";
+import Pagination from "../../components/Pagination";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
+  const state = useSelector((state) => state.pagination)
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchMyAPI() {
-      let movies = await dispatch(getMovies());
-      movies = movies.results;
-      setMovies(movies);
+      const movies = await dispatch(getMovies(state.page));
+      console.log(movies)
+      const moviesArr = movies.results;
+      setMovies(moviesArr);
     }
     fetchMyAPI();
-  }, [dispatch]);
+  }, [dispatch, state.page]);
   console.log(movies);
   return (
     <div className="movies">
@@ -30,6 +34,7 @@ function Movies() {
             />
           );
         })}
+        <Pagination/>
     </div>
   );
 }

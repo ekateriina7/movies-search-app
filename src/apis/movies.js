@@ -8,8 +8,12 @@ export const moviesAxios = axios.create({
     },
   });
 
-  export const getMovies = async () => {
-    const { data } = await moviesAxios.get('/movie/popular');
+  export const getMovies = async (page) => {
+    const { data } = await moviesAxios.get('/movie/popular',{
+      params: {
+        page: page,
+      },
+    });
     return data;
   };
 

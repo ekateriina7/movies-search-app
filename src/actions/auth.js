@@ -1,4 +1,4 @@
-import { getFirestore, setDoc, doc, collection } from "firebase/firestore/lite";
+import { getFirestore, setDoc, doc, } from "firebase/firestore/lite";
 import {
   getAuth,
   createUserWithEmailAndPassword,
