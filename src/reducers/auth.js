@@ -8,39 +8,53 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
+  GET_USER_DATA,
+  GET_USER_DATA_SUCCESS,
+  GET_USER_DATA_ERROR,
 } from "../actions/";
 const initialState = {
   error: null,
   loading: false,
   user: "",
+  userData: "",
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_USER:
-      return { loading: true };
+      return { ...state, loading: true };
 
     case REGISTER_USER_SUCCESS:
-      return { loading: false, user: action.payload };
+      return { ...state, loading: false, user: action.payload };
 
     case REGISTER_USER_ERROR:
-      return { loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload };
     case LOGIN_USER:
-      return { loading: true };
+      return { ...state, loading: true };
 
     case LOGIN_USER_SUCCESS:
-      return { loading: false, user: action.payload };
+      return { ...state, loading: false, user: action.payload };
 
     case LOGIN_USER_ERROR:
-      return { loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload };
     case LOGOUT:
-      return { loading: true };
+      return { ...state, loading: true };
 
     case LOGOUT_SUCCESS:
-      return { loading: false, user: action.payload };
+      return { ...state, loading: false, user: action.payload };
 
     case LOGOUT_ERROR:
-      return { loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload };
+
+    case GET_USER_DATA:
+      return { ...state, loading: true };
+
+    case GET_USER_DATA_SUCCESS:
+      return { ...state, loading: false, userData: action.payload };
+
+    case GET_USER_DATA_ERROR:
+      return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }

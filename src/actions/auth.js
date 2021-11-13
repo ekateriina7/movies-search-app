@@ -1,4 +1,4 @@
-import { getFirestore, setDoc, doc, } from "firebase/firestore/lite";
+import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore/lite";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -76,6 +76,24 @@ export const logout = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGOUT_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const GET_USER_DATA = "Get user data";
+export const GET_USER_DATA_SUCCESS = "Get user data success";
+export const GET_USER_DATA_ERROR = "Get user data error";
+export const getUserData = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_USER_DATA });
+    const docRef = doc(db,'users', userId, 'user', userId,);
+    let data = await getDoc(docRef);
+    dispatch({ type: GET_USER_DATA_SUCCESS, payload: data });
+     return data.data()
+  } catch (error) {
+    dispatch({
+      type: GET_USER_DATA_ERROR,
       payload: error.message,
     });
   }

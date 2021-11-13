@@ -1,4 +1,14 @@
+.movies-container{
+    display: flex;
+    flex-direction: column;
+}
 .movies{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-form{
+    display: flex;
+    align-items: center;
 }

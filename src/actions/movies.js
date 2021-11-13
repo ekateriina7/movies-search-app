@@ -1,5 +1,5 @@
 import * as api from '../apis';
-import { getFirestore, arrayUnion, setDoc, doc, getDoc, } from "firebase/firestore/lite";
+import { getFirestore, arrayUnion, setDoc, doc,  } from "firebase/firestore/lite";
 import app from "../firebase";
 
 const db = getFirestore(app);
@@ -56,19 +56,19 @@ export const markAsFavorite = (userId, id) => async (dispatch) => {
   }
 };
 
-export const GET_USER_DATA = "Get user data";
-export const GET_USER_DATA_SUCCESS = "Get user data success";
-export const GET_USER_DATA_ERROR = "Get user data error";
-export const getUserData = (userId) => async (dispatch) => {
+export const SEARCH_MOVIES_BY_TITLE = "Search movies by title";
+export const SEARCH_MOVIES_BY_TITLE_SUCCESS = "Search movies by title success";
+export const SEARCH_MOVIES_BY_TITLE_ERROR = "Search movies by title error";
+export const searchMoviesByTitle = (query, page) => async (dispatch) => {
   try {
-    dispatch({ type: GET_USER_DATA });
-    const docRef = doc(db,'users', userId, 'user', userId,);
-    let data = await getDoc(docRef);
-    dispatch({ type: GET_USER_DATA_SUCCESS, payload: data });
-     return data.data()
+    dispatch({ type: SEARCH_MOVIES_BY_TITLE });
+    let data = await api.searchMovieByTitle(query,page)
+    console.log(data, query,'here')
+    dispatch({ type: SEARCH_MOVIES_BY_TITLE_SUCCESS, payload: {data, query} });
+     return data
   } catch (error) {
     dispatch({
-      type: GET_USER_DATA_ERROR,
+      type: SEARCH_MOVIES_BY_TITLE_ERROR,
       payload: error.message,
     });
   }

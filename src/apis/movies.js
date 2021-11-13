@@ -21,3 +21,13 @@ export const moviesAxios = axios.create({
     const { data } = await moviesAxios.get(`/movie/${movieId}`);
     return data;
   };
+
+  export const searchMovieByTitle = async (query, page) => {
+    const { data } = await moviesAxios.get('/search/movie',{
+      params: {
+        page: page,
+        query: query
+      },
+    });
+    return data;
+  };

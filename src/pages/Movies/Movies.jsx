@@ -1,40 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { getMovies } from "../../actions";
-import MovieCard from "../../components/MovieCard/MovieCard";
+import { useDispatch, useSelector } from "react-redux";
+import { searchMoviesByTitle, getMovies } from "../../actions";
 import "./Movies.scss";
 import Pagination from "../../components/Pagination";
+import Input from "../../components/ui/Input";
+import Button from "../../components/ui/Button/Button";
+import MoviesCards from "../../components/MoviesCards";
 
 function Movies() {
-  const [movies, setMovies] = useState([]);
-  const state = useSelector((state) => state.pagination)
+  const [query, setQuery]= useState({query:''})
+  const [search, setSearch]= useState(false)
+  const statePagination = useSelector((state) => state.pagination);
+  console.log(query);
   const dispatch = useDispatch();
   useEffect(() => {
-    async function fetchMyAPI() {
-      const movies = await dispatch(getMovies(state.page));
-      console.log(movies)
-      const moviesArr = movies.results;
-      setMovies(moviesArr);
-    }
-    fetchMyAPI();
-  }, [dispatch, state.page]);
-  console.log(movies);
+    if(search){
+      console.log(query, 'worked')
+      dispatch(searchMoviesByTitle(query.query, statePagination.page));
+     
+    } else{console.log('didnt work')
+      dispatch(getMovies(statePagination.page));
+  }
+    
+  }, [dispatch, statePagination.page, search,query]);
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setQuery((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const onClick = (e) => {
+    e.preventDefault()
+    dispatch(searchMoviesByTitle(query.query, statePagination.page));
+    setSearch(true)
+  };
+
   return (
-    <div className="movies">
-      {movies &&
-        movies.map((movie) => {
-          return (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              imagePath={movie.poster_path}
-              vote={movie.vote_average}
-              id={movie.id}
-            />
-          );
-        })}
-        <Pagination/>
+    <div className="container movies-container">
+      <form className="search-form" onSubmit={e=>onClick(e)}>
+        <div className="input-field">
+        <input
+        type='search'
+        value={query.query}
+        name='query'
+        className="input-field"
+        placeholder='Enter the title'
+        onChange={e=>onChange(e)}
+      />
+        </div>
+        <Button>
+          <i className="material-icons">search</i>
+        </Button>
+      </form>
+      <MoviesCards />
+      <Pagination />
     </div>
   );
 }
