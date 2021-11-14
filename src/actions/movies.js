@@ -110,11 +110,11 @@ export const getLanguages = () => async (dispatch) => {
 export const SEARCH_MOVIES_BY_GENRES_LANGUAGE = "Search movies by genres and language";
 export const SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS = "Search movies by genres and language success";
 export const SEARCH_MOVIES_BY_GENRES_LANGUAGE_ERROR = "Search movies by genres and language error";
-export const searchMoviesByGenresLanguage = (genre, language) => async (dispatch) => {
+export const searchMoviesByGenresLanguage = (genre, language, page) => async (dispatch) => {
   console.log(language, genre, 'lamg')
   try {
     dispatch({ type: SEARCH_MOVIES_BY_GENRES_LANGUAGE });
-    let data = await api.searchMoviesByGenreAndTitle( genre, language)
+    let data = await api.searchMoviesByGenreAndTitle( genre, language, page)
     console.log(data)
     dispatch({ type: SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS, payload: data });
      return data

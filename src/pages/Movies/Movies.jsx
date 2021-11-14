@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchMoviesByGenresLanguage, searchMoviesByTitle, getMovies, } from "../../actions";
+import {
+  searchMoviesByGenresLanguage,
+  searchMoviesByTitle,
+  getMovies,
+} from "../../actions";
 import "./Movies.scss";
 import Pagination from "../../components/Pagination";
 //import Input from "../../components/ui/Input";
@@ -14,7 +18,7 @@ function Movies() {
   const [search, setSearch] = useState(false);
   const statePagination = useSelector((state) => state.pagination);
   const stateMovies = useSelector((state) => state.movies);
-  console.log(stateMovies)
+  console.log(stateMovies);
   const dispatch = useDispatch();
   useEffect(() => {
     if (search) {
@@ -22,14 +26,26 @@ function Movies() {
         setSearch(false);
       }
       dispatch(searchMoviesByTitle(query.query, statePagination.page));
+    } else if (stateMovies.language || stateMovies.genresQueries) {
+      console.log("here changed");
+      dispatch(
+        searchMoviesByGenresLanguage(
+          stateMovies.genresQueries,
+          stateMovies.language,
+          statePagination.page
+        )
+      );
     } else {
       dispatch(getMovies(statePagination.page));
     }
-    if(stateMovies.language||stateMovies.genresQueries){
-      console.log('here changed')
-      dispatch(searchMoviesByGenresLanguage(stateMovies.genresQueries,stateMovies.language))
-    }
-  }, [dispatch, statePagination.page, search, query, stateMovies.language, stateMovies.genresQueries]);
+  }, [
+    dispatch,
+    statePagination.page,
+    search,
+    query,
+    stateMovies.language,
+    stateMovies.genresQueries,
+  ]);
   const onChange = (e) => {
     const { name, value } = e.target;
     setQuery((prevState) => ({
@@ -42,30 +58,28 @@ function Movies() {
     dispatch(searchMoviesByTitle(query.query, statePagination.page));
     setSearch(true);
   };
-  const onClickSearch = ()=>{
-    dispatch(searchMoviesByGenresLanguage('no'))
-  }
 
   return (
     <div className="container movies-container">
-      <Genres/>
-      <div onClick={onClickSearch}>click</div>
-      <Languages/>
-      <form className="search-form" onSubmit={(e) => onClick(e)}>
-        <div className="input-field">
-          <input
-            type="search"
-            value={query.query}
-            name="query"
-            className="input-field"
-            placeholder="Enter the title"
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <Button>
-          <i className="material-icons">search</i>
-        </Button>
-      </form>
+      <Genres />
+      <div className="search-language-container">
+        <form className="search-form" onSubmit={(e) => onClick(e)}>
+          <div className="input-field">
+            <input
+              type="search"
+              value={query.query}
+              name="query"
+              className="input-field"
+              placeholder="Enter the title"
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <Button>
+            <i className="material-icons">search</i>
+          </Button>
+        </form>
+        <Languages />
+      </div>
       <MoviesCards />
       <Pagination />
     </div>
