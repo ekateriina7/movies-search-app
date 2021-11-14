@@ -63,7 +63,6 @@ export const searchMoviesByTitle = (query, page) => async (dispatch) => {
   try {
     dispatch({ type: SEARCH_MOVIES_BY_TITLE });
     let data = await api.searchMovieByTitle(query,page)
-    console.log(data, query,'here')
     dispatch({ type: SEARCH_MOVIES_BY_TITLE_SUCCESS, payload: {data, query} });
      return data
   } catch (error) {
@@ -73,3 +72,68 @@ export const searchMoviesByTitle = (query, page) => async (dispatch) => {
     });
   }
 };
+
+export const GET_GENRES = "Get genres";
+export const GET_GENRES_SUCCESS = "Get genres success";
+export const GET_GENRES_ERROR = "Get genres error";
+export const getGenres = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_GENRES });
+    let data = await api.getGenres()
+    dispatch({ type: GET_GENRES_SUCCESS, payload: data });
+     return data
+  } catch (error) {
+    dispatch({
+      type: GET_GENRES_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const GET_LANGUAGES = "Get languages";
+export const GET_LANGUAGES_SUCCESS = "Get languages success";
+export const GET_LANGUAGES_ERROR = "Get languages error";
+export const getLanguages = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_LANGUAGES });
+    let data = await api.getLanguages()
+    dispatch({ type: GET_LANGUAGES_SUCCESS, payload: data });
+     return data
+  } catch (error) {
+    dispatch({
+      type: GET_LANGUAGES_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const SEARCH_MOVIES_BY_GENRES_LANGUAGE = "Search movies by genres and language";
+export const SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS = "Search movies by genres and language success";
+export const SEARCH_MOVIES_BY_GENRES_LANGUAGE_ERROR = "Search movies by genres and language error";
+export const searchMoviesByGenresLanguage = (genre, language) => async (dispatch) => {
+  console.log(language, genre, 'lamg')
+  try {
+    dispatch({ type: SEARCH_MOVIES_BY_GENRES_LANGUAGE });
+    let data = await api.searchMoviesByGenreAndTitle( genre, language)
+    console.log(data)
+    dispatch({ type: SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS, payload: data });
+     return data
+  } catch (error) {
+    dispatch({
+      type: SEARCH_MOVIES_BY_GENRES_LANGUAGE_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const SET_GENRES_SEARCH = 'Set genre criteria for search';
+export const setGenres = (genre) => ({
+  type: SET_GENRES_SEARCH,
+  payload: genre,
+});
+
+export const SET_LANGUAGE_SEARCH = 'Set language criteria for search';
+export const setLanguage = (lang) => ({
+  type: SET_LANGUAGE_SEARCH,
+  payload: lang,
+});

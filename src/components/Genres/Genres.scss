@@ -1,0 +1,12 @@
+.genres{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2vh 0;
+}
+
+.chip{
+    cursor: pointer;
+    &:hover{
+        background-color: rgb(175, 134, 172);
+    }
+}

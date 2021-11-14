@@ -31,3 +31,30 @@ export const moviesAxios = axios.create({
     });
     return data;
   };
+
+  export const getGenres = async () => {
+    const { data } = await moviesAxios.get('/genre/movie/list');
+    return data;
+  };
+
+  export const getLanguages = async () => {
+    const { data } = await moviesAxios.get('/configuration/languages');
+    return data;
+  };
+
+  export const searchMoviesByGenreAndTitle = async (genres, language) => {
+    console.log(genres, language)
+    if(Array.isArray(genres)){
+      genres = genres.join('|')
+      console.log(genres)
+    }
+   
+    const { data } = await moviesAxios.get('/discover/movie',{
+      params: {
+        with_genres: genres,
+        with_original_language: language
+      },
+    });
+    console.log(data)
+    return data;
+  };

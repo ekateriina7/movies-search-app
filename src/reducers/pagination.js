@@ -2,6 +2,7 @@ import {
   CHANGE_PAGE,
   GET_MOVIES_SUCCESS,
   SEARCH_MOVIES_BY_TITLE_SUCCESS,
+  SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS,
 } from "../actions";
 export const initialState = {
   page: 1,
@@ -21,9 +22,15 @@ export function paginationReducer(state = initialState, action) {
         numberOfPages: action.payload.total_pages,
       };
     case SEARCH_MOVIES_BY_TITLE_SUCCESS:
-      return { 
-        ...state, 
-        numberOfPages: action.payload.data.total_pages };
+      return {
+        ...state,
+        numberOfPages: action.payload.data.total_pages,
+      };
+    case SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS:
+      return {
+        ...state,
+        numberOfPages: action.payload.total_pages,
+      };
 
     default:
       return state;
