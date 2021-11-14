@@ -11,12 +11,15 @@ import {
   GET_USER_DATA,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_ERROR,
+  GET_USER_IMAGE,
+  GET_USER_IMAGE_SUCCESS,
+  GET_USER_IMAGE_ERROR
 } from "../actions/";
 const initialState = {
   error: null,
   loading: false,
   user: "",
-  userData: "",
+  pic:''
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -53,6 +56,16 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, loading: false, userData: action.payload };
 
     case GET_USER_DATA_ERROR:
+      return { ...state, loading: false, error: action.payload };
+
+      case GET_USER_IMAGE:
+      return { ...state, loading: true };
+
+    case GET_USER_IMAGE_SUCCESS:
+      console.log(action.payload)
+      return { ...state, loading: false, pic: action.payload };
+
+    case GET_USER_IMAGE_ERROR:
       return { ...state, loading: false, error: action.payload };
 
     default:

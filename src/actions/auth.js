@@ -5,10 +5,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import app from "../firebase";
 
 const auth = getAuth();
 const db = getFirestore(app);
+const storage = getStorage();
+const id = localStorage.getItem("userId");
+const imgRef = ref(storage, id);
 
 export const REGISTER_USER = "Register user";
 export const REGISTER_USER_SUCCESS = "Register user success";
@@ -21,7 +25,7 @@ export const registerUser = (user) => async (dispatch) => {
       user.email,
       user.password
     );
-    localStorage.setItem('userId',data.user.uid)
+    localStorage.setItem("userId", data.user.uid);
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
     const userObj = {
       firstName: user.firstName,
@@ -30,10 +34,10 @@ export const registerUser = (user) => async (dispatch) => {
       sex: user.sex,
       dateOfBirth: user.dateOfBirth,
       username: user.username,
-      favorites:[]
-    }
-    const dbRef = doc(db,`users/${data.user.uid}/user/${data.user.uid}`)
-     await setDoc(dbRef,userObj);
+      favorites: [],
+    };
+    const dbRef = doc(db, `users/${data.user.uid}/user/${data.user.uid}`);
+    await setDoc(dbRef, userObj);
   } catch (error) {
     dispatch({
       type: REGISTER_USER_ERROR,
@@ -54,7 +58,7 @@ export const loginUser = (user) => async (dispatch) => {
       user.email,
       user.password
     );
-    localStorage.setItem('userId',data.user.uid)
+    localStorage.setItem("userId", data.user.uid);
     dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -84,16 +88,35 @@ export const logout = () => async (dispatch) => {
 export const GET_USER_DATA = "Get user data";
 export const GET_USER_DATA_SUCCESS = "Get user data success";
 export const GET_USER_DATA_ERROR = "Get user data error";
-export const getUserData = (userId) => async (dispatch) => {
+export const getUserData = () => async (dispatch) => {
   try {
     dispatch({ type: GET_USER_DATA });
-    const docRef = doc(db,'users', userId, 'user', userId,);
+    const docRef = doc(db, "users", id, "user", id);
     let data = await getDoc(docRef);
     dispatch({ type: GET_USER_DATA_SUCCESS, payload: data });
-     return data.data()
+    return data.data();
   } catch (error) {
     dispatch({
       type: GET_USER_DATA_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const GET_USER_IMAGE = "Get user image";
+export const GET_USER_IMAGE_SUCCESS = "Get user image";
+export const GET_USER_IMAGE_ERROR = "Get user image error";
+export const getUserImage = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_USER_IMAGE });
+    const url = await getDownloadURL(imgRef)
+    console.log(url)
+    const userRef = doc(db, 'users', id, 'user', id);
+    let data = await setDoc(userRef, { photo: url}, { merge: true });
+    dispatch({ type: GET_USER_IMAGE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: GET_USER_IMAGE_ERROR,
       payload: error.message,
     });
   }

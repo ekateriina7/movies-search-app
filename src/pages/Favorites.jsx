@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { getMovie, getUserData } from "../actions";
 import MovieCard from "../components/MovieCard/MovieCard";
 
-//const ids = [2, 3];
-
 function Favorites() {
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();

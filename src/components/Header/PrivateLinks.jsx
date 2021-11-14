@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout, getUserData } from "../../actions";
+import { getStorage, ref } from "firebase/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, getUserData, } from "../../actions";
 
 const PrivateLinks = () => {
   const [user, setUser] = useState({})
+  const state = useSelector((state)=>state.auth)
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
     async function fetchMyAPI() {
-      const data = await dispatch(getUserData(localStorage.getItem("userId")));
+      const data = await dispatch(getUserData());
       setUser(data);
     }
     fetchMyAPI();
@@ -34,8 +36,7 @@ const PrivateLinks = () => {
           <NavLink to={path}>My profile</NavLink>
         </li>
         <li>
-         
-         <a href='/profile' className="btn-floating btn-large waves-effect waves-light red">{user.username}</a>
+         <img style={{width:'62px', height:'62px'}} src={user.photo} className="circle"/>
         </li>
         <li>
           <a href="/" onClick={(e) => onSubmit(e)}>
