@@ -12,6 +12,7 @@ import Button from "../../components/ui/Button/Button";
 import MoviesCards from "../../components/MoviesCards";
 import Genres from "../../components/Genres/Genres";
 import Languages from "../../components/Languages/Languages";
+import Loader from "../../components/Loader";
 
 function Movies() {
   const [query, setQuery] = useState({ query: "" });
@@ -61,6 +62,7 @@ function Movies() {
 
   return (
     <div className="container movies-container">
+      {stateMovies.loading && <Loader/>}
       <Genres />
       <div className="search-language-container">
         <form className="search-form" onSubmit={(e) => onClick(e)}>

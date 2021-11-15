@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { getUserData } from "../../actions";
 import UploadPhoto from "../../components/UploadPhoto";
 import "./Profile.scss";
+import Loader from "../../components/Loader";
 
 function Account() {
   const [user, setUser] = useState({});
+  const state = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchMyAPI() {
@@ -18,6 +20,7 @@ function Account() {
   const date = moment.unix((user.dateOfBirth)/1000).format("DD/MM/YYYY");
   return (
     <div className="user-profile container">
+      {state.loading && <Loader/>}
       <div className="userInfo">
         <div className="userInfo__pic">
           <img src={user.photo||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="avatar" />

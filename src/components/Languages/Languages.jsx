@@ -17,7 +17,7 @@ function Languages() {
   };
 
   return (
-    <div className="select-container">
+    <div className="select-container" style={{width: '30%'}}>
       <Select
         options={state.languages}
         getOptionLabel={(options) => options["english_name"]}

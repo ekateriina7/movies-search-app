@@ -11,15 +11,11 @@ function MovieCard({ title, imagePath, vote, id}) {
   return (
     <div className="card movie-card">
       <div className="card-image">
-        <img onClick={onClick} src={imagePath?`${imageUrl}${imagePath}`:'https://blog.hubspot.com/hubfs/Sales_Blog/famous-movie-quotes.jpg'} alt="movie avatar" />
-        <span className="card-title">{title}</span>
+        <img onClick={onClick} src={imagePath&&`${imageUrl}${imagePath}`} alt="movie avatar" />
       </div>
       <div className="card-content">
-        <p></p>
-      </div>
-      <div className="card-action">
-        <p>{vote}</p>
-        <a href="/">This is a link</a>
+        <h6>{title}</h6>
+        <p>Rated as: {vote}</p>
       </div>
     </div>
   );
