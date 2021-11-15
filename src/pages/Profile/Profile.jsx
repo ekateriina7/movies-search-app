@@ -30,7 +30,7 @@ function Account() {
         </h5>
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
-        <p>Gender: {user.sex}</p>
+        <p>Gender: {user.gender}</p>
         <p>Date of birth: {date}</p>
       </div>
       <UploadPhoto />

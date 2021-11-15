@@ -1,13 +1,54 @@
-.movie-card{
-    width: 22.3%;
-    margin:  1vh;
-    
+.detail-card{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.fav{
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 2px;
+    text-align: center;
 
     &:hover{
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+        background-color: rgb(172, 172, 172);
     }
-    img{
-        cursor: pointer;
-        background-color: black;
-    }
+}
+
+.card-item{
+    width: 23%;
+    border: 1px solid rgb(184, 184, 184);
+    margin: 0.5vh;
+}
+.movie-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.image{
+    overflow: hidden;
+    height: 400px;
+    width: 100%;
+}
+
+.card-img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
+.card-content{
+    flex-grow: 1;
+    margin: 1vh;
+}
+
+.card-footer{
+    margin: 1vh;
 }
