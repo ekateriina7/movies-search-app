@@ -11,7 +11,6 @@ function Languages() {
     dispatch(getLanguages());
   }, [dispatch]);
   const handleChange = (value) => {
-    console.log(value.iso_639_1);
     setSelected({ value });
     dispatch(setLanguage(value.iso_639_1));
   };

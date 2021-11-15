@@ -30,7 +30,6 @@ const UploadPhoto = () => {
         type="file"
         name="img"
         onChange={(e) => {
-          console.log(e.target.files[0]);
           setSelectedImage(e.target.files[0]);
           uploadPhoto(e.target.files[0]);
           dispatch(getUserImage());

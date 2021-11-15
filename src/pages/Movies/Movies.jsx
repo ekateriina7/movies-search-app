@@ -19,7 +19,6 @@ function Movies() {
   const [search, setSearch] = useState(false);
   const statePagination = useSelector((state) => state.pagination);
   const stateMovies = useSelector((state) => state.movies);
-  console.log(stateMovies);
   const dispatch = useDispatch();
   useEffect(() => {
     if (search) {
@@ -28,7 +27,6 @@ function Movies() {
       }
       dispatch(searchMoviesByTitle(query.query, statePagination.page));
     } else if (stateMovies.language || stateMovies.genresQueries) {
-      console.log("here changed");
       dispatch(
         searchMoviesByGenresLanguage(
           stateMovies.genresQueries,

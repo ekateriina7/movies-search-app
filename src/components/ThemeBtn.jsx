@@ -6,7 +6,6 @@ import {changeTheme} from '../actions';
 function ThemeBtn() {
     const dispatch = useDispatch()
     const state = useSelector(state=>state.theme)
-    console.log(state)
     const[dark, setDark] = useState(false)
     const onClick = () =>{
         setDark(!dark)

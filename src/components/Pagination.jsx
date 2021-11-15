@@ -5,10 +5,8 @@ import {changePage} from '../actions'
 function App() {
     const state = useSelector((state) => state.pagination)
     const dispatch = useDispatch()
-    console.log(state.numberOfPages)
   
   const onClick = (data) => {
-    console.log(data.selected);
     dispatch(changePage(data.selected+1))
   };
   return (

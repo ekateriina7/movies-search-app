@@ -62,7 +62,6 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case GET_USER_IMAGE_SUCCESS:
-      console.log(action.payload)
       return { ...state, loading: false, pic: action.payload };
 
     case GET_USER_IMAGE_ERROR:

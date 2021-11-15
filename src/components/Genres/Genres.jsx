@@ -7,7 +7,6 @@ import Tag from "../Tag";
 function Genres() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.movies);
-  //console.log(state.genres);
   useEffect(() => {
     dispatch(getGenres());
   }, [dispatch]);

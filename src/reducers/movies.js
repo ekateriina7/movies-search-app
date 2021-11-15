@@ -96,7 +96,6 @@ export const moviesReducer = (state = initialState, action) => {
     case SEARCH_MOVIES_BY_GENRES_LANGUAGE:
       return { ...state, loading: true };
     case SEARCH_MOVIES_BY_GENRES_LANGUAGE_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         loading: false,

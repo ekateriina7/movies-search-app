@@ -110,7 +110,6 @@ export const getUserImage = () => async (dispatch) => {
     dispatch({ type: GET_USER_IMAGE });
     const imgRef = ref(storage, id);
     const url = await getDownloadURL(imgRef)
-    console.log(url)
     const userRef = doc(db, 'users', id, 'user', id);
     let data = await setDoc(userRef, { photo: url}, { merge: true });
     dispatch({ type: GET_USER_IMAGE_SUCCESS, payload: data });

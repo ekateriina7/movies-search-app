@@ -10,7 +10,6 @@ function Favorites() {
     async function fetchMyAPI() {
       const  data = await dispatch(getUserData(localStorage.getItem('userId')));
       const ids = data.favorites
-      console.log(ids)
       let movies = [];
       ids&&ids.map((id) => {
         dispatch(getMovie(id)).then((res) => {
@@ -23,7 +22,6 @@ function Favorites() {
     fetchMyAPI();
   }, [dispatch]);
 
-  console.log(movies);
   return (
     <div className="movies container">
       {movies &&

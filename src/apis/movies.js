@@ -43,10 +43,8 @@ export const moviesAxios = axios.create({
   };
 
   export const searchMoviesByGenreAndTitle = async (genres, language, page) => {
-    console.log(genres, language, page)
     if(Array.isArray(genres)){
       genres = genres.join('|')
-      console.log(genres)
     }
    
     const { data } = await moviesAxios.get('/discover/movie',{
@@ -56,6 +54,5 @@ export const moviesAxios = axios.create({
         page: page,
       },
     });
-    console.log(data)
     return data;
   };
