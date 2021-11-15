@@ -1,5 +1,5 @@
 import LogIn from "../pages/LogIn";
-import SignUp from "../pages/SignUp";
+import SignUp from "../pages/SignUp/SignUp";
 import Movies from "../pages/Movies/Movies";
 import Movie from "../pages/Movie/Movie";
 import Profile from "../pages/Profile/Profile";

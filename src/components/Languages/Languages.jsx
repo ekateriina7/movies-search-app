@@ -7,16 +7,15 @@ function Languages() {
   const [selected, setSelected] = useState(null);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.movies);
-  console.log(state.languages);
   useEffect(() => {
     dispatch(getLanguages());
   }, [dispatch]);
   const handleChange = (value) => {
     console.log(value.iso_639_1);
     setSelected({ value });
-    dispatch(setLanguage(value.iso_639_1))
+    dispatch(setLanguage(value.iso_639_1));
   };
-  
+
   return (
     <div className="select-container">
       <Select

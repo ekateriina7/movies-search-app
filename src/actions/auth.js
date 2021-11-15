@@ -1,4 +1,4 @@
-import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore/lite";
+import { getFirestore, setDoc, doc, getDoc,  } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -12,12 +12,11 @@ const auth = getAuth();
 const db = getFirestore(app);
 const storage = getStorage();
 const id = localStorage.getItem("userId");
-const imgRef = ref(storage, id);
 
 export const REGISTER_USER = "Register user";
 export const REGISTER_USER_SUCCESS = "Register user success";
 export const REGISTER_USER_ERROR = "Register user error";
-export const registerUser = (user) => async (dispatch) => {
+export const registerUser = (user, date, gender ) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER });
     const data = await createUserWithEmailAndPassword(
@@ -31,8 +30,8 @@ export const registerUser = (user) => async (dispatch) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      sex: user.sex,
-      dateOfBirth: user.dateOfBirth,
+      gender:gender.value,
+      dateOfBirth: date,
       username: user.username,
       favorites: [],
     };
@@ -109,11 +108,13 @@ export const GET_USER_IMAGE_ERROR = "Get user image error";
 export const getUserImage = () => async (dispatch) => {
   try {
     dispatch({ type: GET_USER_IMAGE });
+    const imgRef = ref(storage, id);
     const url = await getDownloadURL(imgRef)
     console.log(url)
     const userRef = doc(db, 'users', id, 'user', id);
     let data = await setDoc(userRef, { photo: url}, { merge: true });
     dispatch({ type: GET_USER_IMAGE_SUCCESS, payload: data });
+    return data
   } catch (error) {
     dispatch({
       type: GET_USER_IMAGE_ERROR,

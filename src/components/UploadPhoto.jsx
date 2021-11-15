@@ -1,35 +1,39 @@
 import React, { useState } from "react";
-import { getStorage, ref,uploadBytes } from "firebase/storage";
-
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { useDispatch } from "react-redux";
+import { getUserImage } from "../actions";
 
 const UploadPhoto = () => {
+  const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(null);
   const storage = getStorage();
-  const name = localStorage.getItem('userId')
+  const name = localStorage.getItem("userId");
   const storageRef = ref(storage, name);
-  const uploadPhoto = (pic)=>{
-      uploadBytes(storageRef, pic).then((snapshot) => {
-  });}
-  
+  const uploadPhoto = (pic) => {
+    uploadBytes(storageRef, pic).then((snapshot) => {});
+  };
+
   return (
     <div>
-      <h5>Upload your photo</h5>
+      <p>Upload your photo</p>
       {selectedImage && (
         <div>
-        <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+          <img
+            alt="not fount"
+            width={"250px"}
+            src={URL.createObjectURL(selectedImage)}
+          />
         </div>
       )}
-      <br />
-     
-      <br /> 
+
       <input
         type="file"
-        name="image"
+        name="img"
         onChange={(e) => {
           console.log(e.target.files[0]);
           setSelectedImage(e.target.files[0]);
-          uploadPhoto(e.target.files[0])
-
+          uploadPhoto(e.target.files[0]);
+          dispatch(getUserImage());
         }}
       />
     </div>

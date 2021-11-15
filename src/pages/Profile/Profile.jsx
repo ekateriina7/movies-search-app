@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import moment from 'moment';
 import { getUserData } from "../../actions";
 import UploadPhoto from "../../components/UploadPhoto";
+import "./Profile.scss";
 
 function Account() {
   const [user, setUser] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     async function fetchMyAPI() {
       const data = await dispatch(getUserData());
@@ -13,11 +15,24 @@ function Account() {
     }
     fetchMyAPI();
   }, [dispatch]);
-  console.log(user)
-  return <div className='user-profile'>
-    <UploadPhoto/>
-      <h5>{user.firstName} {user.lastName}</h5>
-  </div>;
+  const date = moment.unix((user.dateOfBirth)/1000).format("DD/MM/YYYY");
+  return (
+    <div className="user-profile container">
+      <div className="userInfo">
+        <div className="userInfo__pic">
+          <img src={user.photo||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="avatar" />
+        </div>
+        <h5>
+          Name: {user.firstName} {user.lastName}
+        </h5>
+        <p>Username: {user.username}</p>
+        <p>Email: {user.email}</p>
+        <p>Gender: {user.sex}</p>
+        <p>Date of birth: {date}</p>
+      </div>
+      <UploadPhoto />
+    </div>
+  );
 }
 
 export default Account;

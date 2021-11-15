@@ -25,7 +25,7 @@ function Favorites() {
 
   console.log(movies);
   return (
-    <div className="movies">
+    <div className="movies container">
       {movies &&
         movies.map((movie) => {
           return (

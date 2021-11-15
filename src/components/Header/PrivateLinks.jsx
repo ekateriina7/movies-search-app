@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { getStorage, ref } from "firebase/storage";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { logout, getUserData, } from "../../actions";
 
 const PrivateLinks = () => {
   const [user, setUser] = useState({})
-  const state = useSelector((state)=>state.auth)
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -26,6 +24,9 @@ const PrivateLinks = () => {
   return (
     <div>
       <ul className="right">
+      <li  style={{marginRight:'3vh', fontStyle:'italic'}}>
+          Hi, {user.username}
+        </li>
         <li>
           <NavLink to="/movies">Movies</NavLink>
         </li>
@@ -36,7 +37,7 @@ const PrivateLinks = () => {
           <NavLink to={path}>My profile</NavLink>
         </li>
         <li>
-         <img style={{width:'62px', height:'62px'}} src={user.photo} className="circle"/>
+         <img style={{width:'62px', height:'62px'}} src={user.photo||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} className="circle" alt='avatar'/>
         </li>
         <li>
           <a href="/" onClick={(e) => onSubmit(e)}>

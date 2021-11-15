@@ -11,8 +11,8 @@ function Login() {
   const history = useHistory();
   const dispatch = useDispatch();
   const schema = Yup.object({
-    password: Yup.string().required("Password is required"),
-    email: Yup.string().required("Email is a required field"),
+    password: Yup.string().required("Password is required").min(6, 'Password is too short - should be 6 chars minimum.'),
+    email: Yup.string().email("Email should have correct format").required("Email is a required field"),
   });
   const { handleSubmit, handleChange, handleBlur, touched, values, errors } =
     useFormik({
@@ -25,7 +25,7 @@ function Login() {
     });
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form'>
         <div className="row">
           <div className="input-field">
             <input
@@ -57,7 +57,7 @@ function Login() {
               <div>{errors.password}</div>
             ) : null}
           </div>
-          <Button>Register</Button>
+          <Button>Login</Button>
           <Link to='/signup'><p>Don't have account? Sign up</p></Link>
         </div>
       </form>
