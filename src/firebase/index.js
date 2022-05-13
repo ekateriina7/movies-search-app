@@ -3,14 +3,14 @@ import { initializeApp } from 'firebase/app';
 //dotenv.config();
 
 let firebaseConfig = {
-  apiKey: "AIzaSyDkmb_bY55Yte4An5iTGCLcEpfZ--hdbzY",
-  authDomain: "movies-search-1c281.firebaseapp.com",
-  projectId: "movies-search-1c281",
-  storageBucket: "movies-search-1c281.appspot.com",
-  messagingSenderId: "292908955545",
-  appId: "1:292908955545:web:435e196455d64044774508",
-  measurementId: "G-BDGFF4EQGD"
+  apiKey: "AIzaSyAv5-mRz6kbBjjmEpFN2uBIe-cMwMSwfJI",
+  authDomain: "search-movies-31d62.firebaseapp.com",
+  projectId: "search-movies-31d62",
+  storageBucket: "search-movies-31d62.appspot.com",
+  messagingSenderId: "408485356800",
+  appId: "1:408485356800:web:5fd9c02811725f01637fe5"
 };
+
 
   const app = initializeApp(firebaseConfig);
 
